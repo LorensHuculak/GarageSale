@@ -168,6 +168,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Midnite81\GeoLocation\GeoLocationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -229,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'GeoLocation' => Midnite81\GeoLocation\Facades\GeoLocation::class,
 
     ],
 
