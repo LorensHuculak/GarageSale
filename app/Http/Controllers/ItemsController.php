@@ -223,7 +223,7 @@ foreach($categories as $category){
         Return redirect('/items')->with('error', 'You are not authorised.');
     }
 
-    // Remove all Favorites
+    // Remove All Favorites
     $favorites = $item->favoritedBy();
     foreach($favorites as $favorite){
         $favorite->removeFavorite($item);

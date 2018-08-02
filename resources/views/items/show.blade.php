@@ -13,8 +13,26 @@
 
 @if(!Auth::guest())
 
+<?php $status = $item->favoritedBy(); 
+$favorited = 0;?>
+
+@foreach($status as $check)
+@if($check->id == Auth::user()->id)
+<?php $favorited = 1;?>
+@else
+
+
+@endif
+
+@endforeach
+
+@if($favorited == 1)
+<a href="/items/{{$item->id}}/unfavorite" class="Unlike">Unlike</a>
+@else
 <a href="/items/{{$item->id}}/favorite" class="like">Like</a>
-<a href="/items/{{$item->id}}/unfavorite" class="like">Unlike</a>
+@endif
+
+
 
 @if(Auth::user()->id == $item->user_id)
 <a href="/items/{{$item->id}}/edit" class="btn btn-default">Edit</a>
