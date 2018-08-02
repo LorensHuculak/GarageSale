@@ -112,10 +112,29 @@ foreach($categories as $category){
         Return view('items.show')->with('item', $item);
     }
 
+    public function wishlist()
+    {
+        $user = auth()->user();
+        $favoritelist = $user->favorite(Item::class);
+        Return view('wishlist')->with('favoritelist', $favoritelist);
+    }
+
     public function favorite($id)
     {
         $item = Item::find($id);
-        $item->toggleFavorite();
+        $item->addFavorite();
+
+      
+        Return view('items.show')->with(compact('item', $item));
+    }
+
+    public function unfavorite($id)
+    {
+        $item = Item::find($id);
+        $item->removeFavorite();
+
+      
+        Return view('items.show')->with(compact('item', $item));
     }
 
     /**
@@ -203,6 +222,13 @@ foreach($categories as $category){
     if(auth()->user()->id !== $item->user_id) {
         Return redirect('/items')->with('error', 'You are not authorised.');
     }
+
+    // Remove all Favorites
+    $favorites = $item->favoritedBy();
+    foreach($favorites as $favorite){
+        $favorite->removeFavorite($item);
+    }
+    
 
     if($item->product_image != 'noimage.png') {
 // Delete Image

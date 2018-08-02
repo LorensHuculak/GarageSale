@@ -8,11 +8,13 @@
 <p>{!!$item->body!!}</p>
 
 <small>Written on {{$item->created_at}} by {{$item->user->name}}</small>
+<img style="width:10%;" src="/storage/profile_images/{{$item->user->profile_image}}" alt="">
 <hr>  
 
 @if(!Auth::guest())
 
 <a href="/items/{{$item->id}}/favorite" class="like">Like</a>
+<a href="/items/{{$item->id}}/unfavorite" class="like">Unlike</a>
 
 @if(Auth::user()->id == $item->user_id)
 <a href="/items/{{$item->id}}/edit" class="btn btn-default">Edit</a>

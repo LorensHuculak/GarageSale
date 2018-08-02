@@ -40,9 +40,10 @@ Route::resource('items', 'ItemsController');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/wishlist', 'FavoritesController@index')->name('favorites');
+Route::get('/wishlist', 'ItemsController@wishlist')->name('favorites');
 Route::resource('favorites', 'FavoritesController');
 Route::get('users/{user}',  ['as' => 'users.edit', 'uses' => 'UserController@edit']);
 Route::patch('users/{user}/update',  ['as' => 'users.update', 'uses' => 'UserController@update']);
 
 Route::get('items/{item}/favorite', 'ItemsController@favorite');
+Route::get('items/{item}/unfavorite', 'ItemsController@unfavorite');

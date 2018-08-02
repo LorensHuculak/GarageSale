@@ -28,7 +28,7 @@ class FavoritesController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        return view('wishlist')->with('favorites', $user->favorites);
+       
     }
 
     /**

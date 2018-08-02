@@ -11,7 +11,7 @@
                  
                   <h3>Wishlist</h3>
 
-@if (count($favorites) > 0)
+@if (count($favoritelist) > 0)
 
                 <table class="table table-striped">
                     <tr>
@@ -19,17 +19,13 @@
                         <th></th>
                      
                     </tr>
-                    @foreach($favorites as $favorite)
+                    @foreach($favoritelist as $favorite)
 
                   
                     <tr>
-                    <td>{{$favorite->user->name}}</td>
+                    <td>{{$favorite->title}}</td>
               
-                        <td>{!!Form::open(['action' => ['ItemsController@destroy', $favorite->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
-                                {{Form::hidden('_method', 'DELETE')}}
-                                {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                                
-                                {!!Form::close()!!}</td>
+                    <td><a href="items\{{$favorite->id}}\unfavorite">Unfollow</a></td>
                     </tr>
                     @endforeach
                 </table>
