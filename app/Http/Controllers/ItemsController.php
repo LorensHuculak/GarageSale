@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Item;
+use App\Favorite;
 use App\Category;
 
 
@@ -109,6 +110,12 @@ foreach($categories as $category){
     {
         $item = Item::find($id);
         Return view('items.show')->with('item', $item);
+    }
+
+    public function favorite($id)
+    {
+        $item = Item::find($id);
+        $item->toggleFavorite();
     }
 
     /**

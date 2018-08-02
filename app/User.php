@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 
 class User extends Authenticatable
 {
+    use Favoriteability;
     use Notifiable;
 
     /**
@@ -30,4 +32,8 @@ class User extends Authenticatable
     public function items() {
         return $this->hasMany('App\Item');
     }
+
+
+
+  
 }

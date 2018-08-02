@@ -11,6 +11,9 @@
 <hr>  
 
 @if(!Auth::guest())
+
+<a href="/items/{{$item->id}}/favorite" class="like">Like</a>
+
 @if(Auth::user()->id == $item->user_id)
 <a href="/items/{{$item->id}}/edit" class="btn btn-default">Edit</a>
 {!!Form::open(['action' => ['ItemsController@destroy', $item->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
@@ -20,5 +23,7 @@
 {!!Form::close()!!}
 @endif
 @endif
+
+
 
 @endsection

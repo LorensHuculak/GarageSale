@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
+
 
 class Item extends Model
 {
+    use Favoriteable;
     // Table Name
     protected $table = 'items';
     // Primary Key
@@ -16,4 +19,6 @@ class Item extends Model
     public function user(){
 return $this->belongsTo('App\User');
     }
+
+ 
 }

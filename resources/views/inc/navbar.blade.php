@@ -42,7 +42,10 @@
                                   </a>
   
                                   <ul class="dropdown-menu">
-                                    <li><a href="/dashboard">Dashboard</a></li>
+                                    <li><a href="/dashboard">My Items</a></li>
+                                    <li><a href="/wishlist">My Wishlist</a></li>
+                                    <hr>
+                                  <li><a href="/users/{{Auth::user()->id}}">My Profile</a></li>
                                       <li>
                                           <a href="{{ route('logout') }}"
                                               onclick="event.preventDefault();
