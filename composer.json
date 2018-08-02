@@ -12,6 +12,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
         "midnite81/geolocation": "^1.0",
+        "stevebauman/location": "^3.0",
         "unisharp/laravel-ckeditor": "^4.7"
     },
     "require-dev": {
