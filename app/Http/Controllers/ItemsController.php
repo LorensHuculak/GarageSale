@@ -9,6 +9,8 @@ use App\Favorite;
 use App\Category;
 
 
+
+
 class ItemsController extends Controller
 {
     /**
@@ -28,7 +30,12 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $items = Item::orderBy('created_at', 'desc')->paginate(10);
+        $ip = '91.180.55.5';
+        // Correct-> $ip = \Request::ip();
+        $position = \Location::get($ip);
+        $location = $position->countryCode;
+
+        $items = Item::where('location', $location)->orderBy('created_at', 'desc')->paginate(10);
         // $items = Item::orderBy('title', 'desc')->take(1)->get();
        // return $item = Item::where('title', 'Item 1')->get();
         return view('items.index')->with('items', $items);
@@ -63,7 +70,7 @@ foreach($categories as $category){
             'body' => 'required',
             'price' => 'required',
             'category' => 'required',
-            'location' => 'required',
+            //'location' => 'required',
             'product_image' => 'image|nullable|max:1999'
         ]);
 
@@ -91,7 +98,11 @@ foreach($categories as $category){
         $item->body = $request->input('body');
         $item->price = $request->input('price');
         $item->category = $request->input('category');
-        $item->location = $request->input('location');
+        //$item->location = $request->input('location');
+        $ip = '91.180.55.5';
+        // Correct-> $ip = \Request::ip();
+        $position = \Location::get($ip);
+        $item->location = $position->countryCode;
         $item->user_id = auth()->user()->id;
         $item->product_image = $filenameToStore;
         $item->save();
@@ -199,7 +210,9 @@ foreach($categories as $category){
         $item->body = $request->input('body');
         $item->price = $request->input('price');
         $item->category = $request->input('category');
-        $item->location = $request->input('location');
+        //$item->location = $request->input('location');
+        $position = Location::get();
+        $item->location = $position;
         if($request->hasFile('product_image')){
             $item->product_image = $filenameToStore;
         }

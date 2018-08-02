@@ -32,6 +32,13 @@ Route::get('/services', 'PagesController@services' );
 
 Route::resource('items', 'ItemsController');
 
+Route::get('get-ip-details', function () {
+	$ip = '91.180.55.5';
+    //$data = \Location::get($ip);
+    $data = \Location::get($ip);
+    dd($data);
+});
+
 
 
 

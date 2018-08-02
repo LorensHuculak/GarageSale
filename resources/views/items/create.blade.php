@@ -28,10 +28,10 @@
 
    
 
-     <div class="form-group">
+    {{--}} <div class="form-group">
             {{Form::label('location', 'Location')}}
             {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'Location'])}}        
-                </div>
+                </div> --}}
 
                 <div class="form-group">
                     {{Form::file('product_image')}}
