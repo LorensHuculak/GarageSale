@@ -24,10 +24,10 @@
                 {{Form::select('category', $select, $item->category, ['class' => 'form-control'])}}        
      </div>
 
-     <div class="form-group">
+  {{--  <div class="form-group">
             {{Form::label('location', 'Location')}}
             {{Form::text('location', $item->location, ['class' => 'form-control', 'placeholder' => 'Location'])}}        
-                </div>
+                </div> --}}
 
             
        <div class="form-group">

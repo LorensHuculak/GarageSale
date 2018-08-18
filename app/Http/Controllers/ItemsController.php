@@ -32,8 +32,8 @@ class ItemsController extends Controller
     {
         $ip = '91.180.55.5';
         // Correct-> $ip = \Request::ip();
-        $position = \Location::get($ip);
-        $location = $position->countryCode;
+        //$position = \Location::get($ip);
+        $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp'))["geoplugin_city"];
 
         $items = Item::where('location', $location)->orderBy('created_at', 'desc')->paginate(10);
         // $items = Item::orderBy('title', 'desc')->take(1)->get();
@@ -99,10 +99,11 @@ foreach($categories as $category){
         $item->price = $request->input('price');
         $item->category = $request->input('category');
         //$item->location = $request->input('location');
-        $ip = '91.180.55.5';
+        //$ip = '91.180.55.5';
         // Correct-> $ip = \Request::ip();
-        $position = \Location::get($ip);
-        $item->location = $position->countryCode;
+        //$position = \Location::get($ip);
+        //$item->location = $position->countryCode;
+        $item->location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp'))["geoplugin_city"];
         $item->user_id = auth()->user()->id;
         $item->product_image = $filenameToStore;
         $item->save();
@@ -144,7 +145,6 @@ foreach($categories as $category){
         $item = Item::find($id);
         $item->removeFavorite();
 
-      
         Return view('items.show')->with(compact('item', $item));
     }
 
@@ -185,7 +185,7 @@ foreach($categories as $category){
             'body' => 'required',
             'price' => 'required',
             'category' => 'required',
-            'location' => 'required',
+         //   'location' => 'required',
             'product_image' => 'image|nullable|max:1999'
         ]);
 
@@ -211,8 +211,9 @@ foreach($categories as $category){
         $item->price = $request->input('price');
         $item->category = $request->input('category');
         //$item->location = $request->input('location');
-        $position = Location::get();
-        $item->location = $position;
+       // $position = Location::get();
+        //$item->location = $position;
+        $item->location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp'))["geoplugin_city"];
         if($request->hasFile('product_image')){
             $item->product_image = $filenameToStore;
         }
