@@ -56,7 +56,7 @@
         </div>
       
         <div class="col-lg-5">
-          <div class="g-px-40--lg g-py-70">
+          <div class="g-px-40--lg g-py-30">
             <!-- Product Info -->
             <div class="g-mb-30">
               <h1 class="g-font-weight-300 mb-4">{{$item->title}}
@@ -134,7 +134,7 @@
                 <!-- End Location -->
 
             <!-- Category -->
-            <div class="d-flex justify-content-between align-items-center g-brd-bottom g-brd-gray-light-v3 py-3 g-mb-30" role="tab">
+            <div class="d-flex justify-content-between align-items-center g-brd-bottom g-brd-gray-light-v3 py-3 " role="tab">
               <h5 class="g-color-gray-dark-v5 g-font-weight-400 g-font-size-default mb-0">Category</h5>
       
               <!-- Checkbox -->
@@ -148,52 +148,85 @@
             </div>
             <!-- End Category -->
       
-         
-      
-            <!-- Quantity 
-            <div class="d-flex justify-content-between align-items-center g-brd-bottom g-brd-gray-light-v3 py-3 g-mb-30" role="tab">
-              <h5 class="g-color-gray-dark-v5 g-font-weight-400 g-font-size-default mb-0">Quantity</h5>
-      
-              <div class="js-quantity input-group u-quantity-v1 g-width-80 g-brd-primary--focus">
-                <input class="js-result form-control text-center g-font-size-13 rounded-0" type="text" value="1" readonly="">
-      
-                <div class="input-group-addon d-flex align-items-center g-width-30 g-bg-white g-font-size-13 rounded-0 g-pa-5">
-                  <i class="js-plus g-color-gray g-color-primary--hover fa fa-angle-up"></i>
-                  <i class="js-minus g-color-gray g-color-primary--hover fa fa-angle-down"></i>
-                </div>
+       
+         <!-- Category -->
+         <div class="d-flex justify-content-between align-items-center g-brd-bottom g-brd-gray-light-v3 py-3 g-mb-30" role="tab">
+                <h5 class="g-color-gray-dark-v5 g-font-weight-400 g-font-size-default mb-0">Added on</h5>
+        
+                <!-- Checkbox -->
+                <ul class="list-inline mb-0">
+                  <li class="list-inline-item g-mx-10">
+                         <?php
+                        echo date('d-m-Y', strtotime($item->created_at)); 
+                            ?>
+                  </li>
+                 
+                </ul>
+                <!-- End Checkbox -->
               </div>
-            </div>
-            <!-- End Quantity -->
-      
+              <!-- End Category -->
+              @if(!Auth::guest())
+              @if(Auth::user()->id != $item->user_id)
+              <div class="row g-mx-minus-5 g-mb-20">
+                    <div class="col g-px-5 g-mb-10">
+                      <button class="btn btn-block u-btn-primary g-font-size-12 text-uppercase g-py-15 g-px-25" type="button">
+                              Contact Seller
+                              <i class="align-middle ml-2 hs-admin-email"></i>               
+                      </button>
+                    </div>
+                    <div class="col g-px-5 g-mb-10">
+        
+                  <?php $status = $item->favoritedBy(); 
+                  $favorited = 0;?>
+                  
+                  @foreach($status as $check)
+                  @if($check->id == Auth::user()->id)
+                  <?php $favorited = 1;?>
+                  @else
+
+                  
+                  @endif
+
+                  @endforeach
+
+                  @if($favorited == 1)
+             
+                  <a class="btn btn-block u-btn-outline-orange g-brd-gray-dark-v5 g-brd-orange--hover g-color-gray-dark-v4 g-color-white--hover g-font-size-12 text-uppercase g-py-15 g-px-25"  href="/items/{{$item->id}}/unfavorite" >
+                        Added to Wishlist
+                         <i class="fa fa-heart g-color-orange"></i>    
+                  @else
+                                
+                  <a href="/items/{{$item->id}}/favorite" class="btn btn-block u-btn-outline-orange g-brd-gray-dark-v5 g-brd-orange--hover g-color-gray-dark-v4 g-color-white--hover g-font-size-12 text-uppercase g-py-15 g-px-25"  href="/items/{{$item->id}}/unfavorite">
+                    Add to Wishlist
+                     <i class="fa fa-heart-o"></i>    
+                  @endif
+
+             
+          </li>
+          @endif
+          @endif
             <!-- Buttons -->
-            <div class="row g-mx-minus-5 g-mb-20">
-              <div class="col g-px-5 g-mb-10">
-                <button class="btn btn-block u-btn-primary g-font-size-12 text-uppercase g-py-15 g-px-25" type="button">
-                        Add to Wishlist
-                        <i class="align-middle ml-2 icon-medical-022 u-line-icon-pro"></i>
-               
-                </button>
-              </div>
-              <div class="col g-px-5 g-mb-10">
-                <button class="btn btn-block u-btn-outline-orange g-brd-gray-dark-v5 g-brd-orange--hover g-color-gray-dark-v4 g-color-white--hover g-font-size-12 text-uppercase g-py-15 g-px-25" type="button">
-                        Contact Seller
-                        <i class="align-middle ml-2 hs-admin-email"></i>
-                </button>
+           
+             
+              
+                     
+                      
+        </a>
               </div>
             </div>
             <!-- End Buttons -->
-      
-            <!-- Nav Tabs -->
-            <ul class="nav d-flex justify-content-between g-font-size-12 text-uppercase" role="tablist" data-target="nav-1-1-default-hor-left">
-              <li class="nav-item g-brd-bottom g-brd-gray-dark-v4">
-                <a class="nav-link active g-color-primary--active g-pa-0 g-pb-1" data-toggle="tab" href="#nav-1-1-default-hor-left--3" role="tab">Edit</a>
-              </li>
-          
-              <li class="nav-item g-brd-bottom g-brd-gray-dark-v4">
-                <a class="nav-link g-color-primary--active g-pa-0 g-pb-1" data-toggle="tab" href="#nav-1-1-default-hor-left--2" role="tab">Delete</a>
-              </li>
-            </ul>
-            <!-- End Nav Tabs -->
+            @if(Auth::user()->id == $item->user_id)
+            <ul class="nav d-flex justify-content-between g-font-size-12 text-uppercase">
+                    <li class="nav-item g-brd-bottom g-brd-gray-dark-v4">
+                      <a class="g-color-primary--active g-pa-0 g-pb-1" href="/items/{{$item->id}}/edit" role="tab">Edit</a>
+                    </li>
+                
+                    <li class="nav-item g-brd-bottom g-brd-gray-dark-v4">
+                      <a class="nav-link g-color-primary--active g-pa-0 g-pb-1" data-toggle="tab" href="#nav-1-1-default-hor-left--2" role="tab">Delete</a>
+                    </li>
+                  </ul>
+            @endif
+         
       
             
               </div>
