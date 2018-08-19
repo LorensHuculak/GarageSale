@@ -181,6 +181,7 @@ return [
         Unisharp\Ckeditor\ServiceProvider::class,
         ChristianKuri\LaravelFavorite\FavoriteServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
 
     ],
 

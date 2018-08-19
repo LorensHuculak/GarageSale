@@ -19,38 +19,40 @@
             <div class="js-slide g-bg-cover g-bg-black-opacity-0_1--after">
             <img class="img-fluid w-100" src="/storage/product_images/{{$item->product_image}}" alt="Image Description">
             </div>
+            
+            @if( $item->product_image2 != 'null' )
             <div class="js-slide g-bg-cover g-bg-black-opacity-0_1--after">
-              <img class="img-fluid w-100" src="{{asset('assets//img-temp/650x750/img2.jpg')}}" alt="Image Description">
-            </div>
+                    <img class="img-fluid w-100" src="/storage/product_images/{{$item->product_image2}}" alt="Image Description">
+                  </div>
+            @endif
+           
+            @if( $item->product_image3 != 'null' )
             <div class="js-slide g-bg-cover g-bg-black-opacity-0_1--after">
-              <img class="img-fluid w-100" src="{{asset('assets//img-temp/650x750/img3.jpg')}}" alt="Image Description">
+              <img class="img-fluid w-100" src="/storage/product_images/{{$item->product_image3}}" alt="Image Description">
             </div>
+            @endif
           </div>
       
           <div id="carousel2" class="js-carousel text-center u-carousel-v3 g-mx-minus-5 g-mb-10" data-infinite="true" data-center-mode="true" data-slides-show="3" data-is-thumbs="true" data-nav-for="#carousel1">
+            
+                <div class="js-slide g-cursor-pointer g-px-5">
+                        <img class="img-fluid" src="/storage/product_images/{{$item->product_image}}" alt="Image Description">
+                      </div>
+
+                      @if( $item->product_image2 != 'null' )
             <div class="js-slide g-cursor-pointer g-px-5">
-              <img class="img-fluid" src="{{asset('assets//img-temp/250x170/img1.jpg')}}" alt="Image Description">
+              <img class="img-fluid" src="/storage/product_images/{{$item->product_image2}}" alt="Image Description">
             </div>
+            @endif
       
+            @if( $item->product_image3 != 'null' )
             <div class="js-slide g-cursor-pointer g-px-5">
-              <img class="img-fluid" src="{{asset('assets//img-temp/250x170/img2.jpg')}}" alt="Image Description">
+              <img class="img-fluid" src="/storage/product_images/{{$item->product_image3}}" alt="Image Description">
             </div>
+            @endif
       
-            <div class="js-slide g-cursor-pointer g-px-5">
-              <img class="img-fluid" src="{{asset('assets//img-temp/250x170/img3.jpg')}}" alt="Image Description">
-            </div>
       
-            <div class="js-slide g-cursor-pointer g-px-5">
-              <img class="img-fluid" src="{{asset('assets//img-temp/250x170/img1.jpg')}}" alt="Image Description">
-            </div>
-      
-            <div class="js-slide g-cursor-pointer g-px-5">
-              <img class="img-fluid" src="{{asset('assets//img-temp/250x170/img2.jpg')}}" alt="Image Description">
-            </div>
-      
-            <div class="js-slide g-cursor-pointer g-px-5">
-              <img class="img-fluid" src="{{asset('assets//img-temp/250x170/img3.jpg')}}" alt="Image Description">
-            </div>
+          
           </div>
           <!-- End Carousel -->
         </div>
@@ -169,10 +171,10 @@
               @if(Auth::user()->id != $item->user_id)
               <div class="row g-mx-minus-5 g-mb-20">
                     <div class="col g-px-5 g-mb-10">
-                      <button class="btn btn-block u-btn-primary g-font-size-12 text-uppercase g-py-15 g-px-25" type="button">
+                    <a class="btn btn-block u-btn-primary g-font-size-12 text-uppercase g-py-15 g-px-25" href="/messages/create?uid={{$item->user->id}}&subject={{$item->title}}">
                               Contact Seller
                               <i class="align-middle ml-2 hs-admin-email"></i>               
-                      </button>
+                      </a>
                     </div>
                     <div class="col g-px-5 g-mb-10">
         
@@ -218,11 +220,16 @@
             @if(Auth::user()->id == $item->user_id)
             <ul class="nav d-flex justify-content-between g-font-size-12 text-uppercase">
                     <li class="nav-item g-brd-bottom g-brd-gray-dark-v4">
-                      <a class="g-color-primary--active g-pa-0 g-pb-1" href="/items/{{$item->id}}/edit" role="tab">Edit</a>
+                      <a class="g-color-primary--active g-pa-0 g-pb-1" href="/items/{{$item->id}}/edit" >Edit</a>
                     </li>
                 
                     <li class="nav-item g-brd-bottom g-brd-gray-dark-v4">
-                      <a class="nav-link g-color-primary--active g-pa-0 g-pb-1" data-toggle="tab" href="#nav-1-1-default-hor-left--2" role="tab">Delete</a>
+                      <a class=" g-color-primary--active g-pa-0 g-pb-1" href="/" onclick="document.getElementById('deleteForm').submit();" >Delete</a>
+                      {!!Form::open(['action' => ['ItemsController@destroy', $item->id], 'method' => 'POST', 'id' => 'deleteForm'])!!}
+                      {{Form::hidden('_method', 'DELETE')}}
+                      {{Form::submit('Delete', ['style' => 'display: none;', 'class' => 'deleteBtn'])}}
+                      
+                      {!!Form::close()!!}
                     </li>
                   </ul>
             @endif

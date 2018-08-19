@@ -47,8 +47,15 @@
                 </div> --}}
 
                 <div class="form-group">
+                    {{Form::label('product_image', 'Product Image')}}
                     {{Form::file('product_image')}}
                 </div>
+
+                <div class="form-group">
+                        {{Form::label('product_image2', 'Extra Images')}}
+                        {{Form::file('product_image2')}}
+                        {{Form::file('product_image3', ['class' => 'g-mt-10'])}}
+                    </div>
 
      {{Form::submit('Add Item', ['class' => 'btn btn-primary'])}}
 {!! Form::close() !!}

@@ -71,6 +71,8 @@ foreach($categories as $category){
             'price' => 'required',
             'category' => 'required',
             //'location' => 'required',
+            'product_image' => 'image|nullable|max:1999',
+            'product_image' => 'image|nullable|max:1999',
             'product_image' => 'image|nullable|max:1999'
         ]);
 
@@ -91,6 +93,42 @@ foreach($categories as $category){
             $filenameToStore = 'noimage.png';
         }
 
+        
+        // Handle file upload 2
+
+        if($request->hasFile('product_image2')){
+            // Get filename with extension
+            $filenameWithExt2 = $request->file('product_image2')->getClientOriginalName();
+            // Get filename
+            $filename2 = pathInfo($filenameWithExt2, PATHINFO_FILENAME);
+            // Get extension
+            $fileExt2 = $request->file('product_image2')->getClientOriginalExtension();
+            // Filename to store
+            $filenameToStore2 = $filename2.'_'.time().'.'.$fileExt2;
+            // Upload Image
+            $path = $request->file('product_image2')->storeAs('public/product_images', $filenameToStore2);
+        } else {
+            $filenameToStore2 = 'null';
+        } 
+
+        
+        // Handle file upload 3
+
+        if($request->hasFile('product_image3')){
+            // Get filename with extension
+            $filenameWithExt3 = $request->file('product_image3')->getClientOriginalName();
+            // Get filename
+            $filename3 = pathInfo($filenameWithExt3, PATHINFO_FILENAME);
+            // Get extension
+            $fileExt3 = $request->file('product_image3')->getClientOriginalExtension();
+            // Filename to store
+            $filenameToStore3 = $filename3.'_'.time().'.'.$fileExt3;
+            // Upload Image
+            $path = $request->file('product_image3')->storeAs('public/product_images', $filenameToStore3);
+        } else {
+            $filenameToStore3 = 'null';
+        } 
+
         // Create Item
 
         $item = new Item();
@@ -106,6 +144,8 @@ foreach($categories as $category){
         $item->location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp'))["geoplugin_city"];
         $item->user_id = auth()->user()->id;
         $item->product_image = $filenameToStore;
+        $item->product_image2 = $filenameToStore2;
+        $item->product_image3 = $filenameToStore3;
         $item->save();
 
         return redirect('/items')->with('success', 'Item Created');
