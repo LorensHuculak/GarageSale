@@ -1,77 +1,60 @@
-@extends('layouts.app')
+@extends('layouts.loginapp')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-inverse">
-                <div class="panel-heading">Register</div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
+     
+                <div class="g-bg-white rounded g-py-40 g-px-30">
+                    <header class="text-center mb-4">
+                        <h2 class="h2 g-color-black g-font-weight-600">Signup</h2>
+                    </header>
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
+                    <!-- Form -->
+                    <form class="g-py-15" method="POST" action="{{ route('register') }}">
+                            {{ csrf_field() }}
+                    
+                            <div class="mb-4 form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                    <input value="{{ old('name') }}" required autofocus name="name" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-orange--hover rounded g-py-15 g-px-15" type="text" placeholder="John Doe">
+                                    @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
+                                </div>
+        
+                        <div class="mb-4 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <input value="{{ old('email') }}" required name="email"class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-orange--hover rounded g-py-15 g-px-15" type="email" placeholder="johndoe@gmail.com">
+                            @if ($errors->has('email'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 mb-4 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <input name="password" id="password" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-orange--hover rounded g-py-15 g-px-15" type="password" placeholder="Password">
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 mb-4">
+                                <input id="password-confirm" name="password_confirmation" required class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-orange--hover rounded g-py-15 g-px-15" type="password" placeholder="Password">
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="row justify-content-between">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
+                            <div class="col align-self-center text-right">
+                                <button class="btn btn-block u-btn-orange rounded g-py-13 g-px-25" type="submit">Register Account</button>
                             </div>
                         </div>
                     </form>
+                    <!-- End Form -->
+
+                    <footer class="text-center">
+                        <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">Already have an account? <a class="g-font-weight-600 g-color-orange" href="{{ route('login') }}">Sign In</a>
+                        </p>
+                    </footer>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+      
+    
+<!-- End Signup -->
 @endsection

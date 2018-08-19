@@ -24,20 +24,16 @@
  */
 
 
-Route::get('/', 'PagesController@index');
-
-Route::get('/about', 'PagesController@about' );
-
-Route::get('/services', 'PagesController@services' );
+Route::get('/', 'ItemsController@index');
 
 Route::resource('items', 'ItemsController');
 
-Route::get('get-ip-details', function () {
+/*Route::get('get-ip-details', function () {
   $ip = '91.180.55.5';
   // $ip = Request::ip();
     $data = \Location::get($ip);
     dd($data);
-});
+});*/
 
 
 

@@ -1,7 +1,18 @@
 @extends('layouts.app')
+@section('header')
+<div class="media">
+        <div class="d-flex align-self-center">
+                <a href="/"><span class="u-icon-v1 g-color-primary g-mr-20 g-mt-2"><i class="icon-arrow-left u-line-icon-pro u-line-icon-pro"></i></span></a>
+            <h1 class="g-font-weight-300 g-font-size-28 g-color-black mb-0">Edit Item</h1>
+        </div>
 
+      
+    </div>
+    <hr class="d-flex g-brd-gray-light-v7 g-my-30">
+
+@endsection
 @section('content')
-<h1>Edit Item</h1>
+
 
 {!! Form::open(['action' => ['ItemsController@update', $item->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
     <div class="form-group">
@@ -31,11 +42,12 @@
 
             
        <div class="form-group">
-         {{Form::file('product_image')}}
+            {{Form::label('product_image', 'Product Image')}}
+         {{Form::file('product_image', ['class' => 'form-control-file'])}}
           </div>
 
                 {{Form::hidden('_method', 'PUT')}}
 
-     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+     {{Form::submit('Save Changes', ['class' => 'btn btn-primary'])}}
 {!! Form::close() !!}
 @endsection

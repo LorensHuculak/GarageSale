@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Category;
 
 class DashboardController extends Controller
 {
@@ -26,6 +27,13 @@ class DashboardController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        return view('dashboard')->with('items', $user->items);
+        $items = $user->items;
+
+        $categories = Category::all();
+        $type = [];
+foreach($categories as $category){
+    $type[$category->id] = $category->category;
+}
+        return view('dashboard')->with(compact('items', 'type'));
     }
 }

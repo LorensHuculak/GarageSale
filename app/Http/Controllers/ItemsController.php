@@ -30,12 +30,12 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $ip = '91.180.55.5';
+        //$ip = '91.180.55.5';
         // Correct-> $ip = \Request::ip();
         //$position = \Location::get($ip);
         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp'))["geoplugin_city"];
 
-        $items = Item::where('location', $location)->orderBy('created_at', 'desc')->paginate(10);
+        $items = Item::where('location', $location)->orderBy('created_at', 'desc')->paginate(8);
         // $items = Item::orderBy('title', 'desc')->take(1)->get();
        // return $item = Item::where('title', 'Item 1')->get();
         return view('items.index')->with('items', $items);
@@ -121,14 +121,27 @@ foreach($categories as $category){
     public function show($id)
     {
         $item = Item::find($id);
-        Return view('items.show')->with('item', $item);
+        
+        $categories = Category::all();
+        $type = [];
+foreach($categories as $category){
+    $type[$category->id] = $category->category;
+}
+        Return view('items.show')->with(compact('item', 'type'));
+
     }
 
     public function wishlist()
     {
         $user = auth()->user();
         $favoritelist = $user->favorite(Item::class);
-        Return view('wishlist')->with('favoritelist', $favoritelist);
+
+         $categories = Category::all();
+        $type = [];
+foreach($categories as $category){
+    $type[$category->id] = $category->category;
+}
+        Return view('wishlist')->with(compact('favoritelist', 'type'));
     }
 
     public function favorite($id)
@@ -137,7 +150,7 @@ foreach($categories as $category){
         $item->addFavorite();
 
       
-        Return view('items.show')->with(compact('item', $item));
+        return redirect()->back();
     }
 
     public function unfavorite($id)
@@ -145,7 +158,7 @@ foreach($categories as $category){
         $item = Item::find($id);
         $item->removeFavorite();
 
-        Return view('items.show')->with(compact('item', $item));
+        return redirect()->back();
     }
 
     /**
