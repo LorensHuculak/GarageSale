@@ -28,18 +28,24 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $s = $request->input('s');
+
         //$ip = '91.180.55.5';
         // Correct-> $ip = \Request::ip();
         //$position = \Location::get($ip);
         $location = unserialize(file_get_contents('http://www.geoplugin.net/php.gp'))["geoplugin_city"];
 
-        $items = Item::where('location', $location)->orderBy('created_at', 'desc')->paginate(8);
+        $items = Item::where('location', $location)->orderBy('created_at', 'desc')->search($s)->paginate(8);
         // $items = Item::orderBy('title', 'desc')->take(1)->get();
        // return $item = Item::where('title', 'Item 1')->get();
-        return view('items.index')->with('items', $items);
+        return view('items.index')->with(compact('items', 's'));
     }
+
+    
+
+  
 
     /**
      * Show the form for creating a new resource.

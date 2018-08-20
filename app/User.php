@@ -7,11 +7,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use ChristianKuri\LaravelFavorite\Traits\Favoriteability;
 use Cmgmyr\Messenger\Traits\Messagable;
 
+
 class User extends Authenticatable
 {
     use Favoriteability;
     use Notifiable;
     use Messagable;
+   
 
     /**
      * The attributes that are mass assignable.
