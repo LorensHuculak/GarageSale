@@ -49,7 +49,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item align-middle">
-                                                    <a class="g-color-gray-dark-v5 g-color-primary--hover g-text-underline--none--hover" href="" onclick="document.getElementById('deleteForm').submit();" data-toggle="tooltip" data-placement="top" title="Delete Item">
+                                                    <a class="g-color-gray-dark-v5 g-color-primary--hover g-text-underline--none--hover" href="#" onclick="document.getElementById('deleteForm').submit();" data-toggle="tooltip" data-placement="top" title="Delete Item">
                                                             
                                                         <i class="hs-admin-trash"></i>
                                                         {!!Form::open(['action' => ['ItemsController@destroy', $item->id], 'method' => 'POST', 'id' => 'deleteForm'])!!}

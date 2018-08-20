@@ -67,7 +67,7 @@
                                 @if(!Auth::guest())
                                 @if(Auth::user()->id != $item->user_id)
                             <li class="list-inline-item align-middle mx-0 ">
-                            <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-orange--hover g-font-size-15 rounded-circle" href="/messages/create?uid={{$item->user->id}}" data-toggle="tooltip" data-placement="top" title="Contact Owner">
+                            <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-orange--hover g-font-size-15 rounded-circle" href="/messages/create?uid={{$item->user->id}}&subject={{$item->title}}" data-toggle="tooltip" data-placement="top" title="Contact Owner">
                                     <i class="hs-admin-email"></i>
                                 </a>
                             </li>

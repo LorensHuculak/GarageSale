@@ -224,7 +224,7 @@
                     </li>
                 
                     <li class="nav-item g-brd-bottom g-brd-gray-dark-v4">
-                      <a class=" g-color-primary--active g-pa-0 g-pb-1" href="/" onclick="document.getElementById('deleteForm').submit();" >Delete</a>
+                      <a class=" g-color-primary--active g-pa-0 g-pb-1" href="#" onclick="document.getElementById('deleteForm').submit();" >Delete</a>
                       {!!Form::open(['action' => ['ItemsController@destroy', $item->id], 'method' => 'POST', 'id' => 'deleteForm'])!!}
                       {{Form::hidden('_method', 'DELETE')}}
                       {{Form::submit('Delete', ['style' => 'display: none;', 'class' => 'deleteBtn'])}}

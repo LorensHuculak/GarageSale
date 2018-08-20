@@ -1,6 +1,6 @@
-<?php $class = $thread->isUnread(Auth::id()) ? 'alert-info' : ''; ?>
+<?php $class = $thread->isUnread(Auth::id()) ? 'g-bg-gray-light-v8' : ''; ?>
 <!-- Chat List Item -->
-   <section class="media justify-content-center g-bg-gray-light-v8--active g-brd-bottom--lg g-brd-gray-light-v4 g-pa-15 g-pa-25--lg g-mt-0 ">
+   <section class="media justify-content-center {{$class}} g-brd-bottom--lg g-brd-gray-light-v4 g-pa-15 g-pa-25--lg g-mt-0 ">
         <!-- Chat List Item: Avatar -->
         <div class="d-flex g-mr-20--lg">
             <span class="d-inline-block g-pos-rel">
